@@ -12,5 +12,7 @@
             "email": "b.schoeffmann@mywarm.at"
         }
     ],
-    "require": {}
+    "require": {
+        "league/csv": "^9.16.0"
+    }
 }
