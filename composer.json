@@ -3,7 +3,9 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "MyWarm\\PhpTest\\": "src/"
+            "MyWarm\\PhpTest\\": "src/",
+            "MyWarm\\PhpTest\\TestData\\": "src/testdata"
+
         }
     },
     "authors": [
