@@ -1,6 +1,6 @@
 <?php
 
-namespace MyWarm\PhpTest;
+namespace MyWarm\PhpTest\TestData;
 
 use DateTime;
 

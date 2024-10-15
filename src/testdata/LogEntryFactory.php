@@ -1,6 +1,6 @@
 <?php
 
-namespace MyWarm\PhpTest;
+namespace MyWarm\PhpTest\TestData;
 
 use DateTime;
 
@@ -20,7 +20,7 @@ class LogEntryFactory {
     }
 
     private function getFileHandle() {
-        return fopen('../data/'.$this->initialDate, 'w');
+        return fopen(dirname(__FILE__).'/../../data/'.$this->initialDate->format('Y-m-d').'.csv', 'w');
     }
 
     public function create() {
@@ -34,15 +34,15 @@ class LogEntryFactory {
         fclose($handle);
     }
 
-    private function nextTimestamp() {
+    private function nextTimestamp(): int|null {
         $random = rand(0, self::DELTA_T_MAX);
         $day = $this->initialDate->getTimestamp() + 3600;
-        while ($this->currentTimeStamp + $random < $day) {
+        if ($this->currentTimeStamp + $random < $day) {
             $this->currentTimeStamp += $random;
-            yield $this->currentTimeStamp;
+            return $this->currentTimeStamp;
         }
 
-        yield null;
+        return null;
     }
 
     private function createPageIds(int $amount): void {
@@ -57,18 +57,13 @@ class LogEntryFactory {
         }
     }
 
-    private function nextPageId() {
-        $numberOfPageIds = count($this->pageIds);
-        while (true) {
-            yield $this->pageIds[rand(0, $numberOfPageIds)];
-        }
+    private function nextPageId(): int {
+        return $this->pageIds[rand(0, count($this->pageIds))];
     }
 
-    private function nextUserId() {
-        $numberOfUserIds = count($this->userIds);
-        while (true) {
-            yield $this->userIds[rand(0, $numberOfUserIds)];
-        }
+    private function nextUserId(): int {        
+        return $this->userIds[rand(0, count($this->userIds))];
+
     }
 
 }
