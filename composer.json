@@ -1,0 +1,16 @@
+{
+    "name": "mywarm/phptest",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mywarm\\Phptest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Benedikt Schöffmann",
+            "email": "b.schoeffmann@mywarm.at"
+        }
+    ],
+    "require": {}
+}
