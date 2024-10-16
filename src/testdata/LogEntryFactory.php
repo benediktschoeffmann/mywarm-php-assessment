@@ -11,12 +11,13 @@ class LogEntryFactory {
 
     private int $currentTimeStamp;
 
-    private array $pageIds;
+    private array $pageIds = [];
 
-    private array $userIds;
+    private array $userIds = [];
     
     public function __construct(string $initialDateString) {
         $this->initialDate = new DateTime($initialDateString);
+        $this->currentTimeStamp = $this->initialDate->getTimestamp();
     }
 
     private function getFileHandle() {
@@ -27,8 +28,13 @@ class LogEntryFactory {
         $this->createPageIds(10000);
         $this->createUserIds(1000);
         $handle = $this->getFileHandle();
+        fputcsv($handle, ['date', 'pageId', 'userId']);
         while (($t = $this->nextTimestamp()) != null) {
-            fwrite($handle, "$t,{$this->nextPageId()},{$this->nextUserId()}");
+            fputcsv($handle, [
+                $t,
+                $this->nextPageId(),
+                $this->nextUserId()
+            ]);
         }
 
         fclose($handle);
@@ -46,23 +52,26 @@ class LogEntryFactory {
     }
 
     private function createPageIds(int $amount): void {
-        while ($amount-- > 0) {
-            $this->pageIds[] = rand(0, 10000);
+        for ($i = 0; $i < $amount; $i++) {
+            $this->pageIds[] = rand(0, 9999);
         }
+
+
     }
 
     private function createUserIds(int $amount): void {
-        while ($amount-- > 0) {
-            $this->pageIds[] = rand(1000, 5000);
+        for ($i = 0; $i < $amount; $i++) {
+            $this->userIds[] = rand(0, 999);
         }
     }
 
     private function nextPageId(): int {
-        return $this->pageIds[rand(0, count($this->pageIds))];
+        return $this->pageIds[rand(0, count($this->pageIds) - 1)];
     }
 
     private function nextUserId(): int {        
-        return $this->userIds[rand(0, count($this->userIds))];
+        // return rand(0, 10000);
+        return $this->userIds[rand(0, count($this->userIds) - 1)];
 
     }
 
