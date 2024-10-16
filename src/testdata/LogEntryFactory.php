@@ -4,8 +4,9 @@ namespace MyWarm\PhpTest\TestData;
 
 use DateTime;
 
-class LogEntryFactory {
-    const DELTA_T_MAX = 12;
+class LogEntryFactory
+{
+    public const DELTA_T_MAX = 12;
 
     private DateTime $initialDate;
 
@@ -14,17 +15,20 @@ class LogEntryFactory {
     private array $pageIds = [];
 
     private array $userIds = [];
-    
-    public function __construct(string $initialDateString) {
+
+    public function __construct(string $initialDateString)
+    {
         $this->initialDate = new DateTime($initialDateString);
         $this->currentTimeStamp = $this->initialDate->getTimestamp();
     }
 
-    private function getFileHandle() {
+    private function getFileHandle()
+    {
         return fopen(dirname(__FILE__).'/../../data/'.$this->initialDate->format('Y-m-d').'.csv', 'w');
     }
 
-    public function create() {
+    public function create()
+    {
         $this->createPageIds(10000);
         $this->createUserIds(1000);
         $handle = $this->getFileHandle();
@@ -40,7 +44,8 @@ class LogEntryFactory {
         fclose($handle);
     }
 
-    private function nextTimestamp(): int|null {
+    private function nextTimestamp(): int|null
+    {
         $random = rand(0, self::DELTA_T_MAX);
         $day = $this->initialDate->getTimestamp() + 3600;
         if ($this->currentTimeStamp + $random < $day) {
@@ -51,25 +56,27 @@ class LogEntryFactory {
         return null;
     }
 
-    private function createPageIds(int $amount): void {
+    private function createPageIds(int $amount): void
+    {
         for ($i = 0; $i < $amount; $i++) {
             $this->pageIds[] = rand(0, 9999);
         }
-
-
     }
 
-    private function createUserIds(int $amount): void {
+    private function createUserIds(int $amount): void
+    {
         for ($i = 0; $i < $amount; $i++) {
             $this->userIds[] = rand(0, 999);
         }
     }
 
-    private function nextPageId(): int {
+    private function nextPageId(): int
+    {
         return $this->pageIds[rand(0, count($this->pageIds) - 1)];
     }
 
-    private function nextUserId(): int {        
+    private function nextUserId(): int
+    {
         // return rand(0, 10000);
         return $this->userIds[rand(0, count($this->userIds) - 1)];
 
