@@ -1,3 +1,4 @@
+<?php
 
 use MyWarm\Assessment\Model\LogEntryFactory;
 
