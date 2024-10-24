@@ -1,10 +1,10 @@
 {
-    "name": "mywarm/phptest",
+    "name": "mywarm/php-assessment",
     "type": "project",
     "autoload": {
         "psr-4": {
             "MyWarm\\Assessment\\": "src/",
-            "MyWarm\\Assessment\\TestData\\": "src/testdata"
+            "MyWarm\\Assessment\\Model\\": "src/Model"
 
         }
     },

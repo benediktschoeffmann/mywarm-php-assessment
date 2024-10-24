@@ -25,7 +25,11 @@ class LogEntry
 
     public static function fromArray(array $data): LogEntry
     {
-
+        return new LogEntry(
+            $data['timestamp'],
+            $data['pageId'],
+            $data['userId']
+        );
     }
 
 }
