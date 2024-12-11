@@ -27,7 +27,7 @@ class LogEntryFactory
         return fopen(dirname(__FILE__).'/../../data/'.$this->initialDate->format('Y-m-d').'.csv', 'w');
     }
 
-    public function create()
+    public function create(): void
     {
         $this->createPageIds(10000);
         $this->createUserIds(1000);
