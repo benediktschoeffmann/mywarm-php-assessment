@@ -1,6 +1,6 @@
 Additional Information
 
-## env-variablen
+## .env-variables
 
 ```bash
     cp env.local .env
@@ -8,7 +8,7 @@ Additional Information
 
 ## tools
 
-* [ ] league/csv: simple csv library. Look   [here](https://csv.thephpleague.com/) for documentation.
+* league/csv: simple csv library. already required in the `composer.json`.  Look [here](https://csv.thephpleague.com/) for documentation.
 
   ```php
     use League\Csv\Reader;
