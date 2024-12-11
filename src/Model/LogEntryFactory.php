@@ -77,9 +77,7 @@ class LogEntryFactory
 
     private function nextUserId(): int
     {
-        // return rand(0, 10000);
         return $this->userIds[rand(0, count($this->userIds) - 1)];
-
     }
 
 }
